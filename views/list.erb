@@ -21,4 +21,5 @@
 <p>There are no tasks yet!</p>
 <% end %>
 
-<a href="/">Return to Main Page</a>
+<p><a href="/lists/<%= @list.id() %>/edit">Edit <%= @list.name() %> list</a></p>
+<p><a href="/">Return to Main Page</a></p>
