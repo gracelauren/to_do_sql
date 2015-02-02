@@ -9,6 +9,8 @@ DB = PG.connect({:dbname => 'to_do'})
 
 get("/") do
   @lists = List.all()
+  @tasks = Task.all()
+  @task = Task.new()
   erb(:index)
 end
 
@@ -28,8 +30,9 @@ end
 post("/tasks") do
   description = params.fetch("description")
   list_id = params.fetch("list_id").to_i()
-  task = Task.new({:description => description, :list_id => list_id})
-  task.save()
+  @task = Task.new({:description => description, :list_id => list_id})
+  @task.save()
+  @tasks = Task.all()
   @list = List.find(list_id)
   erb(:list)
 end
@@ -52,5 +55,3 @@ delete("/lists/:id") do
   @lists = List.all()
   erb(:index)
 end
-
-
